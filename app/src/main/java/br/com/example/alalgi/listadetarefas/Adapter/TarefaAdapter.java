@@ -14,30 +14,31 @@ import br.com.example.alalgi.listadetarefas.R;
 
 public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.MyViewRolder> {
 
-    private List<Tarefa> listaTarefa;
+    private List<Tarefa> listaTarefas;
 
     public TarefaAdapter(List<Tarefa> lista) {
-        this.listaTarefa = lista;
+        this.listaTarefas = lista;
     }
 
     @NonNull
     @Override
     public MyViewRolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View itemLista = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_adicionar_tarefa,parent, false);
+        View itemLista = LayoutInflater.from(parent.getContext())
+                                        .inflate(R.layout.lista_tarefa_adapter,parent, false);
 
         return new MyViewRolder(itemLista);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewRolder holder, int position) {
-        Tarefa tarefa = listaTarefa.get(position);
+        Tarefa tarefa = listaTarefas.get(position);
         holder.tarefa.setText(tarefa.getNomeTarefa());
     }
 
     @Override
     public int getItemCount() {
-        return this.listaTarefa.size();
+        return this.listaTarefas.size();
     }
 
     public class MyViewRolder extends  RecyclerView.ViewHolder{

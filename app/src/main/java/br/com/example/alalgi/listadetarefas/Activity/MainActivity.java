@@ -34,9 +34,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //Configurando o recyclerview
-        recyclerView = findViewById(R.id.recicleView);
+        recyclerView = findViewById(R.id.reciclerView);
 
+        recyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void carregarListaTarefas(){
 
-        //
+        //Listar tarefas
         Tarefa tarefa1 = new Tarefa();
         tarefa1.setNomeTarefa("ir ao mercador");
         listaTarefas.add(tarefa1);
@@ -58,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         Tarefa tarefa2 = new Tarefa();
         tarefa2.setNomeTarefa("voltar do supermercado");
         listaTarefas.add(tarefa2);
+
+        //exibir lista de tarefas
 
 
         //configurando um adapter
@@ -77,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         carregarListaTarefas();
         super.onStart();
+
     }
 
     @Override

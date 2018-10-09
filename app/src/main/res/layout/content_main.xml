@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_main">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recicleView"
+        android:id="@+id/reciclerView"
         android:layout_width="368dp"
         android:layout_height="495dp"
         android:layout_marginStart="8dp"
