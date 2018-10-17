@@ -38,10 +38,17 @@ public class AdicionarTarefaActivity extends AppCompatActivity {
 
                 TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
 
-                Tarefa tarefa = new Tarefa();
-                tarefa.setNomeTarefa("Tarefa3");
+                String nomeTarefa = editTarefa.getText().toString();
 
-                tarefaDAO.salvar(tarefa);
+                if (!nomeTarefa.isEmpty()){
+                    Tarefa tarefa = new Tarefa();
+                    tarefa.setNomeTarefa(nomeTarefa);
+
+                    tarefaDAO.salvar(tarefa);
+
+                    //para apos adicionar uma tarefa fechar a tela
+                    finish();
+                }
 
                 break;
         }

@@ -22,6 +22,6 @@
             android:id="@+id/textTarefa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Digite uma @string/digite_uma_tarefa" />
+            android:hint="@string/digite_uma_tarefa" />
     </android.support.design.widget.TextInputLayout>
 </android.support.constraint.ConstraintLayout>

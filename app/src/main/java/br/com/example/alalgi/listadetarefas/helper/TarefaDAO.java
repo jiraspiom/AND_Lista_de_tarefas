@@ -2,9 +2,11 @@ package br.com.example.alalgi.listadetarefas.helper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.example.alalgi.listadetarefas.Model.Tarefa;
@@ -49,6 +51,23 @@ public class TarefaDAO implements ITarefaDAO {
 
     @Override
     public List<Tarefa> listar() {
-        return null;
+        List<Tarefa> tarefas = new ArrayList<>();
+
+        String sql = "SELECT * FROM " + BdHelper.TABELA_TAREFA + " ;";
+        Cursor c = le.rawQuery(sql, null);
+
+        while (c.moveToNext()){
+            Tarefa tarefa = new Tarefa();
+
+            long id = c.getLong(c.getColumnIndex("id"));
+            String nome = c.getString(c.getColumnIndex("nome"));
+
+            tarefa.setId(id);
+            tarefa.setNomeTarefa(nome);
+
+            tarefas.add(tarefa);
+        }
+
+        return tarefas;
     }
 }

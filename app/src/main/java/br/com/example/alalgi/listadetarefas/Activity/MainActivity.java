@@ -23,6 +23,7 @@ import br.com.example.alalgi.listadetarefas.Model.Tarefa;
 import br.com.example.alalgi.listadetarefas.R;
 import br.com.example.alalgi.listadetarefas.helper.BdHelper;
 import br.com.example.alalgi.listadetarefas.helper.RecyclerItemClickListener;
+import br.com.example.alalgi.listadetarefas.helper.TarefaDAO;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -81,13 +82,8 @@ public class MainActivity extends AppCompatActivity {
     public void carregarListaTarefas(){
 
         //Listar tarefas
-        Tarefa tarefa1 = new Tarefa();
-        tarefa1.setNomeTarefa("ir ao mercador");
-        listaTarefas.add(tarefa1);
-
-        Tarefa tarefa2 = new Tarefa();
-        tarefa2.setNomeTarefa("voltar do supermercado");
-        listaTarefas.add(tarefa2);
+        TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
+        listaTarefas = tarefaDAO.listar();
 
         //exibir lista de tarefas
 
