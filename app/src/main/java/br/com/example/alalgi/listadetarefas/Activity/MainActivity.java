@@ -8,9 +8,11 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.List;
 import br.com.example.alalgi.listadetarefas.Adapter.TarefaAdapter;
 import br.com.example.alalgi.listadetarefas.Model.Tarefa;
 import br.com.example.alalgi.listadetarefas.R;
+import br.com.example.alalgi.listadetarefas.helper.RecyclerItemClickListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,12 +39,25 @@ public class MainActivity extends AppCompatActivity {
         //Configurando o recyclerview
         recyclerView = findViewById(R.id.reciclerView);
 
-        recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(),
+                recyclerView,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Log.i("click", "click normal");
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+                        Log.i("click", "click longo");
+                    }
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    }
+                }));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
