@@ -28,7 +28,7 @@ public class BdHelper extends SQLiteOpenHelper {
         try{
 
             db.execSQL(sql);
-            Log.i("INFO DB", "Bando de dados criado com sucesso!");
+            Log.i("INFO DB", "Sucesso ao criar tabela!");
 
         }catch (Exception e){
             Log.i("INFO DB", "Erro ao criar a tabela " + e.getMessage());

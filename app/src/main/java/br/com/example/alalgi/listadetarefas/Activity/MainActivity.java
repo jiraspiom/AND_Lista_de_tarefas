@@ -1,5 +1,6 @@
 package br.com.example.alalgi.listadetarefas.Activity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +21,7 @@ import java.util.List;
 import br.com.example.alalgi.listadetarefas.Adapter.TarefaAdapter;
 import br.com.example.alalgi.listadetarefas.Model.Tarefa;
 import br.com.example.alalgi.listadetarefas.R;
+import br.com.example.alalgi.listadetarefas.helper.BdHelper;
 import br.com.example.alalgi.listadetarefas.helper.RecyclerItemClickListener;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
 
         //Configurando o recyclerview
         recyclerView = findViewById(R.id.reciclerView);
+
+        BdHelper db = new BdHelper(getApplicationContext());
+
+        ContentValues cv = new ContentValues();
+        cv.put("nome", "primeira tarefa");
+
+        db.getWritableDatabase().insert("tabelas",null,cv);
 
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(),
