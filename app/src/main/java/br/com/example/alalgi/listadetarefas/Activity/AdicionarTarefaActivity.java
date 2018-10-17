@@ -33,5 +33,5 @@ public class AdicionarTarefaActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    
+
 }
