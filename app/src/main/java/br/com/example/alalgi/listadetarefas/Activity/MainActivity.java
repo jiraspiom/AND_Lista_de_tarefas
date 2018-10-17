@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         ContentValues cv = new ContentValues();
         cv.put("nome", "primeira tarefa");
 
-        db.getWritableDatabase().insert("tabelas",null,cv);
+        db.getWritableDatabase().insert("tabelas",null, cv);
 
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(),
@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
         //configurando um adapter
         tarefaAdapter = new TarefaAdapter(listaTarefas);
-
 
         //Configurando Recicle
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
