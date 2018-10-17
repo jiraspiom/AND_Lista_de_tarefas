@@ -38,6 +38,15 @@ public class BdHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        String sql = "DROP TABLE IF EXISTS " + TABELA_TAREFA;
 
+        try{
+            db.execSQL(sql);
+            onCreate(db);
+            Log.i("BD INFO", "Bando de dados atualizado com sucesso");
+
+        }catch (Exception e){
+            Log.i("DB INFO", "erro ao atulizar bando de dados " + e.getMessage() );
+        }
     }
 }
