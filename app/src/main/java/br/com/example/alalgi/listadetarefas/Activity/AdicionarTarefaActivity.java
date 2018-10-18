@@ -14,12 +14,20 @@ import br.com.example.alalgi.listadetarefas.helper.TarefaDAO;
 public class AdicionarTarefaActivity extends AppCompatActivity {
 
     private TextInputEditText editTarefa;
+    private Tarefa tarefaAtual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_tarefa);
         editTarefa = findViewById(R.id.textTarefa);
+
+        //recuperar tarefa
+        tarefaAtual = (Tarefa) getIntent().getSerializableExtra("TarefaSelecionada");
+
+        if (tarefaAtual != null){
+            editTarefa.setText(tarefaAtual.getNomeTarefa());
+        }
 
     }
 
@@ -38,17 +46,49 @@ public class AdicionarTarefaActivity extends AppCompatActivity {
 
                 TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
 
-                String nomeTarefa = editTarefa.getText().toString();
+                if (tarefaAtual != null){
+                    String nomeTarefa = editTarefa.getText().getSpanStart();
+                    if(!nomeTarefa.isEmpty()){
+                        Tarefa tarefa = new Tarefa();
+                        tarefa.setNomeTarefa(nomeTarefa);
+                        tarefa.setId(tarefa.getId());
 
-                if (!nomeTarefa.isEmpty()){
-                    Tarefa tarefa = new Tarefa();
-                    tarefa.setNomeTarefa(nomeTarefa);
+                        if(tarefaDAO.atualizar(tarefa)){
 
-                    tarefaDAO.salvar(tarefa);
+                            finish();
+                            Toast.makeText(getApplicationContext(), "Tarefa atualizada com sucesso", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Erro ao atualizar tarefa", Toast.LENGTH_LONG).show();
 
-                    //para apos adicionar uma tarefa fechar a tela
-                    finish();
+                        }
+
+                    }
+
+                }else {
+                    String nomeTarefa = editTarefa.getText().toString();
+
+
+                    if (!nomeTarefa.isEmpty()) {
+                        Tarefa tarefa = new Tarefa();
+                        tarefa.setNomeTarefa(nomeTarefa);
+
+                        if (tarefaDAO.salvar(tarefa)){
+
+                            //para apos adicionar uma tarefa fechar a tela
+                            finish();
+                            Toast.makeText(getApplicationContext(),"Sucesso ao salvar tarefa", Toast.LENGTH_SHORT).show();
+
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Erro ao salvar tarefa", Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+
+                    }
+
                 }
+
 
                 break;
         }
