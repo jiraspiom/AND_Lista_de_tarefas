@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,9 +73,11 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onLongItemClick(View view, int position) {
+
+                        //recupero tarefa para deletar
                         tarefaSelecionada = listaTarefas.get(position);
 
-                        AlertDialog.Builder dialogo = new AlertDialog.Builder(getApplicationContext());
+                        AlertDialog.Builder dialogo = new AlertDialog.Builder(MainActivity.this);
 
                         //configurando o alerta
                         dialogo.setTitle("Confirmar exclusão");
@@ -83,7 +86,15 @@ public class MainActivity extends AppCompatActivity {
                         dialogo.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
+                                if(tarefaDAO.deletar(tarefaSelecionada)){
+                                    carregarListaTarefas();
+                                    Toast.makeText(getApplicationContext(), "Sucesso ao excluir a tarefa", Toast.LENGTH_SHORT).show();
 
+                                }else{
+                                    Toast.makeText(getApplicationContext(), "Erro ao excluir a tarefa", Toast.LENGTH_SHORT).show();
+
+                                }
                             }
                         });
 
