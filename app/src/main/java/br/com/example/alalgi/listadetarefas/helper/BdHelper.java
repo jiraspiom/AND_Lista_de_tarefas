@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+//extendo da minha sqliteopenhelper e implementos os metodos obrigatorios
 public class BdHelper extends SQLiteOpenHelper {
 
     public static int VERSAO = 1;
@@ -14,7 +15,7 @@ public class BdHelper extends SQLiteOpenHelper {
     public static String TABELA_TAREFA = "tarefas";
 
     public BdHelper(@Nullable Context context) {
-        //factory e apena usado para definicao de cursor, nao sera utilizado
+        //factory e apena usado para definicao de cursor, nao sera utilizado no momento
         super(context, NOME_DB, null, VERSAO);
     }
 

@@ -1,9 +1,11 @@
 package br.com.example.alalgi.listadetarefas.Activity;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TarefaAdapter tarefaAdapter;
     private List<Tarefa> listaTarefas = new ArrayList<>();
+    private Tarefa tarefaSelecionada;
 
 
     @Override
@@ -69,7 +72,27 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onLongItemClick(View view, int position) {
-                        Log.i("click", "click longo");
+                        tarefaSelecionada = listaTarefas.get(position);
+
+                        AlertDialog.Builder dialogo = new AlertDialog.Builder(getApplicationContext());
+
+                        //configurando o alerta
+                        dialogo.setTitle("Confirmar exclusão");
+                        dialogo.setMessage("Deseja excluir a tarefa: " + tarefaSelecionada.getNomeTarefa() + "?");
+
+                        dialogo.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+
+                        dialogo.setNegativeButton("Não", null);
+
+                        //exibir dialog
+                        dialogo.create();
+                        dialogo.show();
+
                     }
 
                     @Override

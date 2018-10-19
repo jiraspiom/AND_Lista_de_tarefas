@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,21 @@ public class TarefaDAO implements ITarefaDAO {
 
     @Override
     public boolean atualizar(Tarefa tarefa) {
-        return false;
+        ContentValues cv = new ContentValues();
+        cv.put("nome", tarefa.getNomeTarefa());
+
+        try{
+            String[] args = {tarefa.getId().toString()};
+            escreve.update(BdHelper.TABELA_TAREFA, cv, "id=?", args);
+            Log.i("BD INFO", "Tarefa atualizada com sucesso");
+
+        }catch (Exception e){
+            Log.i("BD INFO", "erro ao atualiza tarefa");
+            return false;
+        }
+
+        return true;
+
     }
 
     @Override
